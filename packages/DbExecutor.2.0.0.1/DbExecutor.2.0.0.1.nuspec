@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+  <metadata>
+    <id>DbExecutor</id>
+    <version>2.0.0.1</version>
+    <title>DbExecutor</title>
+    <authors>neuecc</authors>
+    <owners>neuecc</owners>
+    <licenseUrl>http://dbexecutor.codeplex.com/license</licenseUrl>
+    <projectUrl>http://dbexecutor.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Simple and Lightweight Database Executor for .NET 4 Client Profile and all ADO.NET DbProviders. Features: set command parameter by AnonymousType, auto type mapping, dynamic IDataRecord accessor,transaction, basic Select/Insert/Delete/Update query build.</description>
+    <summary>Simple and Lightweight Database Executor for .NET 4 Client Profile and all ADO.NET DbProviders. Features: set command parameter by AnonymousType, auto type mapping, dynamic IDataRecord accessor,transaction, basic Select/Insert/Delete/Update query build.</summary>
+    <tags>Database Db Sql</tags>
+  </metadata>
+</package>
