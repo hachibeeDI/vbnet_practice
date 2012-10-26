@@ -10,8 +10,8 @@ Option Explicit On
 
 Namespace Models
 
-    Public Class DateColumn
-        Inherits BaseColumn(Of Date)
+    Public Class DateTimeColumn
+        Inherits BaseColumn(Of DateTime)
         Public Sub New()
         End Sub
 

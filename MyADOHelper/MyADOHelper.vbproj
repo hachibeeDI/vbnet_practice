@@ -70,7 +70,7 @@
     <Compile Include="Models\BaseColumn.vb" />
     <Compile Include="Models\BaseModel.vb" />
     <Compile Include="Models\CharColumn.vb" />
-    <Compile Include="Models\DateColumn.vb" />
+    <Compile Include="Models\DateTimeColumn.vb" />
     <Compile Include="Models\NumericColumn.vb" />
     <Compile Include="Models\DecimalColumn.vb" />
     <Compile Include="Models\VarCharColumn.vb" />
