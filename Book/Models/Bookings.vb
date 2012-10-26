@@ -12,13 +12,13 @@ Imports MyADOHelper.Models
 Namespace Models
 
     ''' <summary>  </summary>
-    ''' <remarks>例えばバリデーションだけじゃなくて、ここのカラムの定義情報からフォームコントロールの制約も定義できたらいいよねっていう</remarks>
+    ''' <remarks>例えばバリデーションだけじゃなくて、ここのカラムの定義情報からフォームコントロールの制約も定義できたらいいかなという予定</remarks>
     Public Class Bookings
         Inherits BaseModel
 
 #Region "フィールド"
         Private Property tables_id_field As New NumericColumn(3)
-        Private Property tables_maximum_seats_field As New NumericColumn(2)
+        'Private Property tables_maximum_seats_field As New NumericColumn(2)
         Private Property date_reserve_field As New DateColumn
         Private Property starting_time_field As New CharColumn(4)
         Private Property closing_time_field As New CharColumn(4)
@@ -34,14 +34,14 @@ Namespace Models
             End Get
         End Property
 
-        Public Property tables_maximum_seats As Integer
-            Set(value As Integer)
-                tables_maximum_seats_field.Value = value
-            End Set
-            Get
-                Return tables_maximum_seats_field
-            End Get
-        End Property
+        'Public Property tables_maximum_seats As Integer
+        '    Set(value As Integer)
+        '        tables_maximum_seats_field.Value = value
+        '    End Set
+        '    Get
+        '        Return tables_maximum_seats_field
+        '    End Get
+        'End Property
 
         Public Property date_reserve As Date
             Set(value As Date)
@@ -93,7 +93,7 @@ Namespace Models
 #Region "抽象メソッドのオーバーライド"
         Public Overrides Function checkFieldDefinitions() As Boolean
             Dim f As IEnumerable(Of ICheckableColumn) =
-                {tables_id_field, tables_maximum_seats_field,
+                {tables_id_field,
                  date_reserve_field, starting_time_field,
                  closing_time_field, name_haveReservation_field, num_persons_field
                 }
