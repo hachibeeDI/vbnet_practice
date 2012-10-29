@@ -51,6 +51,10 @@
             Me.SchedulerStorage1 = New DevExpress.XtraScheduler.SchedulerStorage(Me.components)
             Me.BookingsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
             Me.TablesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+            Me.test_end_before = New System.Windows.Forms.TextBox()
+            Me.test_start_before = New System.Windows.Forms.TextBox()
+            Me.test_end_after = New System.Windows.Forms.TextBox()
+            Me.test_start_after = New System.Windows.Forms.TextBox()
             CType(Me.SchedulerControl1, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.SchedulerStorage1, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.BookingsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
@@ -194,6 +198,7 @@
             Me.SchedulerControl1.Text = "SchedulerControl1"
             Me.SchedulerControl1.Views.DayView.TimeRulers.Add(TimeRuler1)
             Me.SchedulerControl1.Views.TimelineView.AppointmentDisplayOptions.StatusDisplayType = DevExpress.XtraScheduler.AppointmentStatusDisplayType.Time
+            Me.SchedulerControl1.Views.TimelineView.DisplayName = "座席予約"
             Me.SchedulerControl1.Views.TimelineView.NavigationButtonAppointmentSearchInterval = System.TimeSpan.Parse("00:30:00")
             TimeScaleYear1.Enabled = False
             TimeScaleMonth1.Enabled = False
@@ -211,10 +216,10 @@
             '
             Me.SchedulerStorage1.Appointments.DataSource = Me.BookingsBindingSource
             Me.SchedulerStorage1.Appointments.Mappings.Description = "num_persons"
+            Me.SchedulerStorage1.Appointments.Mappings.End = "closing_time"
+            Me.SchedulerStorage1.Appointments.Mappings.Label = "num_persons"
             Me.SchedulerStorage1.Appointments.Mappings.ResourceId = "tables_id"
             Me.SchedulerStorage1.Appointments.Mappings.Start = "starting_time"
-            Me.SchedulerStorage1.Appointments.Mappings.Status = "closing_time"
-            Me.SchedulerStorage1.Appointments.Mappings.Subject = "num_persons"
             Me.SchedulerStorage1.Resources.DataSource = Me.TablesBindingSource
             Me.SchedulerStorage1.Resources.Mappings.Caption = "id"
             Me.SchedulerStorage1.Resources.Mappings.Id = "id"
@@ -227,11 +232,43 @@
             '
             Me.TablesBindingSource.DataSource = GetType(Book.Models.Tables)
             '
+            'test_end_before
+            '
+            Me.test_end_before.Location = New System.Drawing.Point(810, 595)
+            Me.test_end_before.Name = "test_end_before"
+            Me.test_end_before.Size = New System.Drawing.Size(166, 19)
+            Me.test_end_before.TabIndex = 17
+            '
+            'test_start_before
+            '
+            Me.test_start_before.Location = New System.Drawing.Point(646, 595)
+            Me.test_start_before.Name = "test_start_before"
+            Me.test_start_before.Size = New System.Drawing.Size(148, 19)
+            Me.test_start_before.TabIndex = 16
+            '
+            'test_end_after
+            '
+            Me.test_end_after.Location = New System.Drawing.Point(810, 653)
+            Me.test_end_after.Name = "test_end_after"
+            Me.test_end_after.Size = New System.Drawing.Size(166, 19)
+            Me.test_end_after.TabIndex = 19
+            '
+            'test_start_after
+            '
+            Me.test_start_after.Location = New System.Drawing.Point(646, 653)
+            Me.test_start_after.Name = "test_start_after"
+            Me.test_start_after.Size = New System.Drawing.Size(148, 19)
+            Me.test_start_after.TabIndex = 18
+            '
             'BookingForm
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
             Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
             Me.ClientSize = New System.Drawing.Size(988, 699)
+            Me.Controls.Add(Me.test_end_after)
+            Me.Controls.Add(Me.test_start_after)
+            Me.Controls.Add(Me.test_end_before)
+            Me.Controls.Add(Me.test_start_before)
             Me.Controls.Add(Me.SchedulerControl1)
             Me.Controls.Add(Me.Label6)
             Me.Controls.Add(Me.txt_date)
@@ -277,5 +314,9 @@
         Friend WithEvents SchedulerStorage1 As DevExpress.XtraScheduler.SchedulerStorage
         Friend WithEvents TablesBindingSource As System.Windows.Forms.BindingSource
         Friend WithEvents BookingsBindingSource As System.Windows.Forms.BindingSource
+        Friend WithEvents test_end_before As System.Windows.Forms.TextBox
+        Friend WithEvents test_start_before As System.Windows.Forms.TextBox
+        Friend WithEvents test_end_after As System.Windows.Forms.TextBox
+        Friend WithEvents test_start_after As System.Windows.Forms.TextBox
     End Class
 End Namespace

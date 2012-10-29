@@ -39,7 +39,55 @@ Namespace Forms
 
         End Sub
 
+        Private Sub SchedulerControl1_AppointmentResized(sender As Object, e As DevExpress.XtraScheduler.AppointmentResizeEventArgs) Handles SchedulerControl1.AppointmentResized
+
+            test_start_after.Text = e.HitInterval.Start.ToString
+            test_end_after.Text = e.HitInterval.End.ToString
+        End Sub
+
+        Private Sub SchedulerControl1_AppointmentResizing(sender As Object, e As DevExpress.XtraScheduler.AppointmentResizeEventArgs) Handles SchedulerControl1.AppointmentResizing
+            test_start_before.Text = e.HitInterval.Start.ToString
+            test_end_before.Text = e.HitInterval.End.ToString
+
+        End Sub
+
         Private Sub SchedulerControl1_Click(sender As System.Object, e As System.EventArgs) Handles SchedulerControl1.Click
+
+        End Sub
+
+        Private Sub SchedulerControl1_InitNewAppointment(sender As Object, e As DevExpress.XtraScheduler.AppointmentEventArgs) Handles SchedulerControl1.InitNewAppointment
+
+        End Sub
+
+        Private Sub SchedulerControl1_InplaceEditorShowing(sender As Object, e As DevExpress.XtraScheduler.InplaceEditorEventArgs) Handles SchedulerControl1.InplaceEditorShowing
+
+        End Sub
+
+        Private Sub SchedulerControl1_StorageChanged(sender As Object, e As System.EventArgs) Handles SchedulerControl1.StorageChanged
+
+        End Sub
+
+        Private Sub SchedulerStorage1_AppointmentChanging(sender As Object, e As DevExpress.XtraScheduler.PersistentObjectCancelEventArgs) Handles SchedulerStorage1.AppointmentChanging
+
+        End Sub
+
+        Private Sub SchedulerStorage1_AppointmentCollectionLoaded(sender As Object, e As System.EventArgs) Handles SchedulerStorage1.AppointmentCollectionLoaded
+
+        End Sub
+
+        Private Sub SchedulerStorage1_AppointmentInserting(sender As Object, e As DevExpress.XtraScheduler.PersistentObjectCancelEventArgs) Handles SchedulerStorage1.AppointmentInserting
+
+        End Sub
+
+        Private Sub SchedulerStorage1_AppointmentsChanged(sender As Object, e As DevExpress.XtraScheduler.PersistentObjectsEventArgs) Handles SchedulerStorage1.AppointmentsChanged
+
+        End Sub
+
+        Private Sub SchedulerStorage1_AppointmentsDeleted(sender As Object, e As DevExpress.XtraScheduler.PersistentObjectsEventArgs) Handles SchedulerStorage1.AppointmentsDeleted
+
+        End Sub
+
+        Private Sub SchedulerStorage1_AppointmentsInserted(sender As Object, e As DevExpress.XtraScheduler.PersistentObjectsEventArgs) Handles SchedulerStorage1.AppointmentsInserted
 
         End Sub
     End Class

@@ -15,6 +15,7 @@ Namespace Binder
     Public MustInherit Class BaseController
         ' テスト用
         Private Const CONNECTION_STRING = "Data Source=.\TEST;Initial Catalog=Booking;Integrated Security=SSPI;"
+        ' なのでここの処理はどっかXMLかなんかに保存しておくようにしたほうが良いと思われる
         Protected ReadOnly Property getConnection As SqlClient.SqlConnection
             Get
                 Return New SqlClient.SqlConnection(CONNECTION_STRING)
