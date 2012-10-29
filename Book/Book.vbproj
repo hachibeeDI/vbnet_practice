@@ -139,6 +139,7 @@
     <Compile Include="Forms\TableManage.vb">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="Forms\ViewController\SchedulerDataDispatcher.vb" />
     <Compile Include="Models\Bookings.vb" />
     <Compile Include="Models\Tables.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
