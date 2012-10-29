@@ -26,6 +26,11 @@
         Private Sub InitializeComponent()
             Me.components = New System.ComponentModel.Container()
             Dim TimeRuler1 As DevExpress.XtraScheduler.TimeRuler = New DevExpress.XtraScheduler.TimeRuler()
+            Dim TimeScaleYear1 As DevExpress.XtraScheduler.TimeScaleYear = New DevExpress.XtraScheduler.TimeScaleYear()
+            Dim TimeScaleMonth1 As DevExpress.XtraScheduler.TimeScaleMonth = New DevExpress.XtraScheduler.TimeScaleMonth()
+            Dim TimeScaleWeek1 As DevExpress.XtraScheduler.TimeScaleWeek = New DevExpress.XtraScheduler.TimeScaleWeek()
+            Dim TimeScaleDay1 As DevExpress.XtraScheduler.TimeScaleDay = New DevExpress.XtraScheduler.TimeScaleDay()
+            Dim TimeScaleFixedInterval1 As DevExpress.XtraScheduler.TimeScaleFixedInterval = New DevExpress.XtraScheduler.TimeScaleFixedInterval()
             Dim TimeRuler2 As DevExpress.XtraScheduler.TimeRuler = New DevExpress.XtraScheduler.TimeRuler()
             Me.ListBox1 = New System.Windows.Forms.ListBox()
             Me.btn_load = New System.Windows.Forms.Button()
@@ -44,8 +49,12 @@
             Me.txt_date = New System.Windows.Forms.TextBox()
             Me.SchedulerControl1 = New DevExpress.XtraScheduler.SchedulerControl()
             Me.SchedulerStorage1 = New DevExpress.XtraScheduler.SchedulerStorage(Me.components)
+            Me.BookingsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+            Me.TablesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
             CType(Me.SchedulerControl1, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.SchedulerStorage1, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.BookingsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.TablesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
             '
             'ListBox1
@@ -173,15 +182,50 @@
             '
             'SchedulerControl1
             '
-            Me.SchedulerControl1.Location = New System.Drawing.Point(344, 123)
+            Me.SchedulerControl1.ActiveViewType = DevExpress.XtraScheduler.SchedulerViewType.Timeline
+            Me.SchedulerControl1.GroupType = DevExpress.XtraScheduler.SchedulerGroupType.Resource
+            Me.SchedulerControl1.Location = New System.Drawing.Point(285, 54)
             Me.SchedulerControl1.Name = "SchedulerControl1"
-            Me.SchedulerControl1.Size = New System.Drawing.Size(400, 200)
-            Me.SchedulerControl1.Start = New Date(2012, 10, 25, 0, 0, 0, 0)
+            Me.SchedulerControl1.OptionsCustomization.AllowAppointmentConflicts = DevExpress.XtraScheduler.AppointmentConflictsMode.Forbidden
+            Me.SchedulerControl1.Size = New System.Drawing.Size(675, 494)
+            Me.SchedulerControl1.Start = New Date(2012, 10, 21, 0, 0, 0, 0)
             Me.SchedulerControl1.Storage = Me.SchedulerStorage1
             Me.SchedulerControl1.TabIndex = 15
             Me.SchedulerControl1.Text = "SchedulerControl1"
             Me.SchedulerControl1.Views.DayView.TimeRulers.Add(TimeRuler1)
+            Me.SchedulerControl1.Views.TimelineView.AppointmentDisplayOptions.StatusDisplayType = DevExpress.XtraScheduler.AppointmentStatusDisplayType.Time
+            Me.SchedulerControl1.Views.TimelineView.NavigationButtonAppointmentSearchInterval = System.TimeSpan.Parse("00:30:00")
+            TimeScaleYear1.Enabled = False
+            TimeScaleMonth1.Enabled = False
+            TimeScaleFixedInterval1.Value = System.TimeSpan.Parse("00:30:00")
+            Me.SchedulerControl1.Views.TimelineView.Scales.Add(TimeScaleYear1)
+            Me.SchedulerControl1.Views.TimelineView.Scales.Add(TimeScaleMonth1)
+            Me.SchedulerControl1.Views.TimelineView.Scales.Add(TimeScaleWeek1)
+            Me.SchedulerControl1.Views.TimelineView.Scales.Add(TimeScaleDay1)
+            Me.SchedulerControl1.Views.TimelineView.Scales.Add(TimeScaleFixedInterval1)
+            Me.SchedulerControl1.Views.TimelineView.WorkTime.End = System.TimeSpan.Parse("22:00:00")
+            Me.SchedulerControl1.Views.TimelineView.WorkTime.Start = System.TimeSpan.Parse("10:00:00")
             Me.SchedulerControl1.Views.WorkWeekView.TimeRulers.Add(TimeRuler2)
+            '
+            'SchedulerStorage1
+            '
+            Me.SchedulerStorage1.Appointments.DataSource = Me.BookingsBindingSource
+            Me.SchedulerStorage1.Appointments.Mappings.Description = "num_persons"
+            Me.SchedulerStorage1.Appointments.Mappings.ResourceId = "tables_id"
+            Me.SchedulerStorage1.Appointments.Mappings.Start = "starting_time"
+            Me.SchedulerStorage1.Appointments.Mappings.Status = "closing_time"
+            Me.SchedulerStorage1.Appointments.Mappings.Subject = "num_persons"
+            Me.SchedulerStorage1.Resources.DataSource = Me.TablesBindingSource
+            Me.SchedulerStorage1.Resources.Mappings.Caption = "id"
+            Me.SchedulerStorage1.Resources.Mappings.Id = "id"
+            '
+            'BookingsBindingSource
+            '
+            Me.BookingsBindingSource.DataSource = GetType(Book.Models.Bookings)
+            '
+            'TablesBindingSource
+            '
+            Me.TablesBindingSource.DataSource = GetType(Book.Models.Tables)
             '
             'BookingForm
             '
@@ -208,6 +252,8 @@
             Me.Text = "book"
             CType(Me.SchedulerControl1, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.SchedulerStorage1, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.BookingsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.TablesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ResumeLayout(False)
             Me.PerformLayout()
 
@@ -229,5 +275,7 @@
         Friend WithEvents txt_date As System.Windows.Forms.TextBox
         Friend WithEvents SchedulerControl1 As DevExpress.XtraScheduler.SchedulerControl
         Friend WithEvents SchedulerStorage1 As DevExpress.XtraScheduler.SchedulerStorage
+        Friend WithEvents TablesBindingSource As System.Windows.Forms.BindingSource
+        Friend WithEvents BookingsBindingSource As System.Windows.Forms.BindingSource
     End Class
 End Namespace
