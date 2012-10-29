@@ -9,22 +9,18 @@ Option Infer On
 Option Explicit On
 
 Namespace Models
-
-    Public Class NumericColumn
+    Public Class IntColumn
         Inherits BaseColumn(Of Integer)
 
-
-        Public Sub New(length As Integer, Optional len_under_point As Integer = 0)
-            MyBase.New(length)
+        Public Sub New(Optional length As Integer = 0)
+            MyBase.New(Length)
         End Sub
-
 
         Public Overrides Function checkDefinition() As Boolean
             If Length = 0 Then Return True
 
             Return Me.Value.ToString.Count >= Me.Length
         End Function
-
     End Class
 
 End Namespace

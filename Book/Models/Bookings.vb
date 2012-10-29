@@ -17,11 +17,21 @@ Namespace Models
         Inherits BaseModel
 
 #Region "フィールド"
+        Private Property id_field As New IntColumn()
         Private Property tables_id_field As New NumericColumn(3)
         Private Property starting_time_field As New DateTimeColumn
         Private Property closing_time_field As New DateTimeColumn
         Private Property name_haveReservation_field As New VarCharColumn(50)
         Private Property num_persons_field As New NumericColumn(2)
+
+        Public Property id As Integer
+            Set(value As Integer)
+                id_field.Value = value
+            End Set
+            Get
+                Return id_field
+            End Get
+        End Property
 
         Public Property tables_id As Integer
             Set(value As Integer)
