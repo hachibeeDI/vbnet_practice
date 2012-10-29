@@ -18,10 +18,8 @@ Namespace Models
 
 #Region "フィールド"
         Private Property tables_id_field As New NumericColumn(3)
-        'Private Property tables_maximum_seats_field As New NumericColumn(2)
-        Private Property date_reserve_field As New DateColumn
-        Private Property starting_time_field As New CharColumn(4)
-        Private Property closing_time_field As New CharColumn(4)
+        Private Property starting_time_field As New DateTimeColumn
+        Private Property closing_time_field As New DateTimeColumn
         Private Property name_haveReservation_field As New VarCharColumn(50)
         Private Property num_persons_field As New NumericColumn(2)
 
@@ -34,26 +32,8 @@ Namespace Models
             End Get
         End Property
 
-        'Public Property tables_maximum_seats As Integer
-        '    Set(value As Integer)
-        '        tables_maximum_seats_field.Value = value
-        '    End Set
-        '    Get
-        '        Return tables_maximum_seats_field
-        '    End Get
-        'End Property
-
-        Public Property date_reserve As Date
-            Set(value As Date)
-                date_reserve_field.Value = value
-            End Set
-            Get
-                Return date_reserve_field
-            End Get
-        End Property
-
-        Public Property starting_time As String
-            Set(value As String)
+        Public Property starting_time As DateTime
+            Set(value As DateTime)
                 starting_time_field.Value = value
             End Set
             Get
@@ -61,8 +41,8 @@ Namespace Models
             End Get
         End Property
 
-        Public Property closing_time As String
-            Set(value As String)
+        Public Property closing_time As DateTime
+            Set(value As DateTime)
                 closing_time_field.Value = value
             End Set
             Get
@@ -93,8 +73,7 @@ Namespace Models
 #Region "抽象メソッドのオーバーライド"
         Public Overrides Function checkFieldDefinitions() As Boolean
             Dim f As IEnumerable(Of ICheckableColumn) =
-                {tables_id_field,
-                 date_reserve_field, starting_time_field,
+                {tables_id_field, starting_time_field,
                  closing_time_field, name_haveReservation_field, num_persons_field
                 }
             'AllよりAnyのほうが処理軽いみたいだけど可読性落ちるのでAll使おう
