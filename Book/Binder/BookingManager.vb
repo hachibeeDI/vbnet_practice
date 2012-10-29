@@ -22,7 +22,7 @@ Namespace Binder
 
 
         Public Overrides Function _
-        reserveBooking(table_id As Integer, targ_date As Date, start As Integer, close As Integer, numberof_seats As Integer, name As String) _
+        reserveBooking(table_id As Integer, start As DateTime, close As DateTime, numberof_seats As Integer, name As String) _
         As Integer
             'このチェックいらないかも
             Dim ids = New TableManager().getAllTables.Select(Function(t) t.id)
@@ -33,7 +33,7 @@ Namespace Binder
             'とりあえず主キー重複は、事前ではなくSQLExceptionで取る。
 
             Try
-                Return MyBase.reserveBooking(table_id, targ_date, start, close, numberof_seats, name)
+                Return MyBase.reserveBooking(table_id, start, close, numberof_seats, name)
             Catch e As SqlClient.SqlException
                 writeLog("ERROR", e.Message)
                 '例えば、エラーコードによってはそのまま処理したい？　その場合はまた別の拡張を考える。
