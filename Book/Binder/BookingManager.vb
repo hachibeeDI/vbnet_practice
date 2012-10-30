@@ -34,7 +34,7 @@ Namespace Binder
         End Sub
 
         Public Shadows Function _
-        reserveBooking(table_id As Integer, start As DateTime, close As DateTime, numberof_seats As Integer, name As String) _
+        reserveBooking(table_id As UInteger, start As DateTime, close As DateTime, numberof_seats As Integer, name As String) _
         As ErrorState.IErrorState
             'このチェックいらないかも
             Dim ids = all_tables.Select(Function(t) t.id)
@@ -45,16 +45,15 @@ Namespace Binder
 
             Dim reserve = Functional.pertial(
                 AddressOf MyBase.reserveBooking,
-                table_id, start, close, numberof_seats, name)
+                CInt(table_id), start, close, numberof_seats, name)
 
             Return TryADOExcute.catchSQLState(reserve)
-
         End Function
 
 
         Public Shadows Function _
         alterBooking(booking_id As UInteger, table_id As Integer, start As DateTime, close As DateTime,
-                    Optional numberof_persons As Integer = 0, Optional name As String = Nothing) _
+                     numberof_persons As Integer, name As String) _
         As ErrorState.IErrorState
 
             Dim validate_result = beforeAlterValidate(table_id, start, close)
@@ -62,9 +61,10 @@ Namespace Binder
                 Return validate_result
             End If
 
-            Dim update = Functional.pertial(
-                AddressOf MyBase.alterBooking,
-                Convert.ToInt32(booking_id), table_id, start, close, numberof_persons, name)
+            Dim update As Func(Of Integer)
+            update = Functional.pertial(
+                            AddressOf MyBase.alterBooking,
+                            Convert.ToInt32(booking_id), table_id, start, close, numberof_persons, name)
 
             Return TryADOExcute.catchSQLState(update)
         End Function
@@ -73,7 +73,7 @@ Namespace Binder
         ''' <param name="table_id"></param>
         ''' <param name="start"></param>
         ''' <param name="close"></param>
-        ''' <remarks>boolとかじゃなくてもっと正当にエラーのケースを返したほうが良いかも</remarks>
+        ''' <remarks></remarks>
         Private Function _
         beforeAlterValidate(table_id As Integer, start As DateTime, close As DateTime) _
         As ErrorState.IErrorState
