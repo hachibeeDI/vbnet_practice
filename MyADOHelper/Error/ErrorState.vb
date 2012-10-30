@@ -39,4 +39,25 @@ Namespace ExceptionLogic.ErrorState
         End Function
     End Class
 
+    ''' <summary>  </summary>
+    ''' <remarks>Dataベースの定義ではなく、アプリケーションの都合上の定義</remarks>
+    Public Class InvailedDateRelation
+        Implements IErrorState
+
+        Public Function getMessage() As String Implements IErrorState.getMessage
+            Return "日付の整合性がとれていません"
+        End Function
+    End Class
+
+    ''' <summary>  </summary>
+    Public Class NoTableId
+        Implements IErrorState
+
+        Public Function getMessage() As String Implements IErrorState.getMessage
+            Return "存在しないテーブル番号を指定しています。"""
+        End Function
+    End Class
+
+
+
 End Namespace
