@@ -67,6 +67,10 @@
     <Compile Include="Error\ErrorState.vb" />
     <Compile Include="Error\ERROR_CODE.vb" />
     <Compile Include="Error\Message.vb" />
+    <Compile Include="Error\Exceptions\MyException.vb" />
+    <Compile Include="Helper\Functional.vb" />
+    <Compile Include="Helper\SysLog.vb" />
+    <Compile Include="Helper\TryADOExcute.vb" />
     <Compile Include="Models\BaseColumn.vb" />
     <Compile Include="Models\BaseModel.vb" />
     <Compile Include="Models\CharColumn.vb" />
