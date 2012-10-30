@@ -8,7 +8,9 @@ Option Strict On
 Option Infer On
 Option Explicit On
 
-Imports MyADOHelper
+Imports MyADOHelper.ExceptionLogic
+Imports MyADOHelper.ExceptionLogic.ErrorState
+Imports MyADOHelper.Helper
 
 Imports Book.Utils.Message
 Imports Book.Utils.Extension.DateTimeExtension
@@ -33,29 +35,19 @@ Namespace Binder
 
         Public Shadows Function _
         reserveBooking(table_id As Integer, start As DateTime, close As DateTime, numberof_seats As Integer, name As String) _
-        As Integer
+        As ErrorState.IErrorState
             'このチェックいらないかも
             Dim ids = all_tables.Select(Function(t) t.id)
             If Not ids.Any(Function(id) id = table_id) Then
-                CustomMessage.showError(SITUATIONS.存在しないid.ToMessageText, "エラー")
-                Return 0
+                '                CustomMessage.showError(SITUATIONS.存在しないid.ToMessageText, "エラー")
+                Return New NoTableId
             End If
-            'とりあえず主キー重複は、事前ではなくSQLExceptionで取る。
 
-            Try
-                Return MyBase.reserveBooking(table_id, start, close, numberof_seats, name)
-            Catch e As SqlClient.SqlException
-                writeLog("ERROR", e.Message)
-                '例えば、エラーコードによってはそのまま処理したい？　その場合はまた別の拡張を考える。
-                'この場合、主キー違反はフロントエンド次第では扱いを変えたくなるかもしれない……
-                Dim m = New ExceptionLogic.Message(e.Number)
-                CustomMessage.showError(m.getMessageByNumber, "エラー")
-                Return 0
-            Catch e As SqlTypes.SqlTypeException
-                writeLog("ERROR", e.Message)
-                CustomMessage.showError(e.Message, "エラー")
-                Return 0
-            End Try
+            Dim reserve = Functional.pertial(
+                AddressOf MyBase.reserveBooking,
+                table_id, start, close, numberof_seats, name)
+
+            Return TryADOExcute.catchSQLState(reserve)
 
         End Function
 
@@ -63,24 +55,38 @@ Namespace Binder
         Public Shadows Function _
         alterBooking(booking_id As UInteger, table_id As Integer, start As DateTime, close As DateTime,
                     Optional numberof_persons As Integer = 0, Optional name As String = Nothing) _
-        As Integer
+        As ErrorState.IErrorState
 
-            If beforeAlterValidate() Then
-
+            Dim validate_result = beforeAlterValidate(table_id, start, close)
+            If validate_result.GetType IsNot GetType(ErrorState.NoError) Then
+                Return validate_result
             End If
 
-            Return MyBase.alterBooking(Convert.ToInt32(booking_id), table_id, start, close, numberof_persons, name)
+            Dim update = Functional.pertial(
+                AddressOf MyBase.alterBooking,
+                Convert.ToInt32(booking_id), table_id, start, close, numberof_persons, name)
 
+            Return TryADOExcute.catchSQLState(update)
         End Function
+
+        ''' <summary>  </summary>
+        ''' <param name="table_id"></param>
+        ''' <param name="start"></param>
+        ''' <param name="close"></param>
+        ''' <remarks>boolとかじゃなくてもっと正当にエラーのケースを返したほうが良いかも</remarks>
         Private Function _
         beforeAlterValidate(table_id As Integer, start As DateTime, close As DateTime) _
-        As Boolean
+        As ErrorState.IErrorState
 
-            If Not start.isLessThen(close) Then Return False
-
+            If Not start.isLessThen(close) Then Return New InvailedDateRelation
+            '存在しないtable_idのようなケースはExceptionを吐いたほうがいい？
+            If Not all_tables.Select(Function(t) t.id).Any(Function(id) id = table_id) Then _
+                Return New NoTableId
 
             Dim today = Date.Today
+            If today.isLessThen(start) Then Return New InvailedDateRelation
 
+            Return New NoError
         End Function
 
     End Class
