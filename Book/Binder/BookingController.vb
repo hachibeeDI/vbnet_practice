@@ -53,8 +53,9 @@ Namespace Binder
                                  ).ToArray()
         End Function
 
-        Public Overridable Function getBookings(targ_date As Date) As IEnumerable(Of Models.Bookings)
+        Public Overridable Function getBookings(targ_date As DateTime) As IEnumerable(Of Models.Bookings)
             'Dynamicの方を使えばIDataRecordからの型変換はいらないけども……
+            'Dynamicも十分高速。移行を検討
             Return _
             DbExecutor.ExecuteReader(MyBase.getConnection,
                 <sql>SELECT TB.tables_id,
@@ -85,7 +86,7 @@ Namespace Binder
         ''' <param name="close">予約の終了時刻</param>
         ''' <param name="name">予約者の氏名</param>
         ''' <returns>ExecutenonQueryのラッパなのでIntegerが返る</returns>
-        Public Overridable Function _
+        Protected Overridable Function _
         reserveBooking(table_id As Integer, start As DateTime, close As DateTime, numberof_seats As Integer, name As String) _
         As Integer
             Return DbExecutor.ExecuteNonQuery(MyBase.getConnection,
@@ -115,8 +116,9 @@ VALUES(
         ''' <param name="close">予約の終了時刻</param>
         ''' <returns>引数は更新したい{開始時刻、終了時刻} 返り値は更新に成功した行数を返す</returns>
         ''' <remarks>高階関数</remarks>
-        Public Overridable Overloads Function _
-        alterBooking(table_id As Integer, start As DateTime, close As DateTime, numberof_persons As Integer) _
+        Protected Overridable Overloads Function _
+        alterBooking(booking_id As Integer, table_id As Integer,
+                    start As DateTime, close As DateTime, numberof_persons As Integer) _
         As Func(Of Integer, Integer, Integer)
 
             Return Function(new_start As Integer, new_close As Integer)
@@ -125,12 +127,10 @@ VALUES(
                                                New With {
                                                    .starting_time = new_start.ToString,
                                                    .closing_time = new_close.ToString,
-                                                   .num_person = numberof_persons
+                                                   .num_persons = numberof_persons
                                                  },
                                                New With {
-                                                   .tables_id = table_id,
-                                                   .starting_time = start,
-                                                   .closing_time = close
+                                                    .id = booking_id
                                                  }
                                               )
                    End Function
@@ -143,8 +143,9 @@ VALUES(
         ''' <param name="name">予約者の名前</param>
         ''' <returns>引数は更新したい{開始時刻、終了時刻、氏名} 返り値は更新に成功した行数を返す</returns>
         ''' <remarks>高階関数</remarks>
-        Public Overridable Overloads Function _
-        alterBooking(table_id As Integer, start As DateTime, close As DateTime, numberof_seats As Integer, name As String) _
+        Protected Overridable Overloads Function _
+        alterBooking(booking_id As Integer, table_id As Integer,
+                     start As DateTime, close As DateTime, numberof_persons As Integer, name As String) _
         As Func(Of DateTime, DateTime, String, Integer)
 
             Return Function(new_start As DateTime, new_close As DateTime, new_name As String)
@@ -153,12 +154,11 @@ VALUES(
                                                New With {
                                                    .starting_time = new_start.ToString,
                                                    .closing_time = new_close.ToString,
+                                                   .num_persons = numberof_persons,
                                                    .name_haveReservation = new_name
                                                  },
                                                New With {
-                                                   .tables_id = table_id,
-                                                   .starting_time = start,
-                                                   .closing_time = close
+                                                   .id = booking_id
                                                  }
                                               )
                    End Function
