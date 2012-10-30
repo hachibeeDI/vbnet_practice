@@ -21,7 +21,7 @@ Namespace ExceptionLogic
 
         Private ReadOnly state_ As IErrorState
 
-        Private Function getState(errorNumber As Integer) As IErrorState
+        Public Shared Function getState(errorNumber As Integer) As IErrorState
             Select Case errorNumber
                 Case ERROR_CODE.主キーの重複
                     Return New PrimarykeyOverlap
