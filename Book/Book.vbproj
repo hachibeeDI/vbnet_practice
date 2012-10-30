@@ -158,9 +158,9 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <Compile Include="Utils\DataRowExtension.vb" />
+    <Compile Include="Utils\DateTimeExtension.vb" />
     <Compile Include="Utils\Messages\SITUATIONS.vb" />
     <Compile Include="Utils\Messages\CustomMessage.vb" />
-    <Compile Include="Utils\SysLog.vb" />
     <Compile Include="Utils\TextBoxValueExtension.vb" />
   </ItemGroup>
   <ItemGroup>
