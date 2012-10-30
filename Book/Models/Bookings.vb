@@ -22,7 +22,7 @@ Namespace Models
         Private Property starting_time_field As New DateTimeColumn
         Private Property closing_time_field As New DateTimeColumn
         Private Property name_haveReservation_field As New VarCharColumn(50)
-        Private Property num_persons_field As New NumericColumn(2)
+        Private Property numberof_persons_field As New NumericColumn(2)
 
         Public Property id As Integer
             Set(value As Integer)
@@ -69,12 +69,12 @@ Namespace Models
             End Get
         End Property
 
-        Public Property num_persons As Integer
+        Public Property numberof_persons As Integer
             Set(value As Integer)
-                num_persons_field.Value = value
+                numberof_persons_field.Value = value
             End Set
             Get
-                Return num_persons_field
+                Return numberof_persons_field
             End Get
         End Property
 
@@ -84,7 +84,7 @@ Namespace Models
         Public Overrides Function checkFieldDefinitions() As Boolean
             Dim f As IEnumerable(Of ICheckableColumn) =
                 {tables_id_field, starting_time_field,
-                 closing_time_field, name_haveReservation_field, num_persons_field
+                 closing_time_field, name_haveReservation_field, numberof_persons_field
                 }
             'AllよりAnyのほうが処理軽いみたいだけど可読性落ちるのでAll使おう
             Return f.All(Function(c) c.checkDefinition)
