@@ -25,7 +25,7 @@ Namespace Binder
         Protected Sub New()
         End Sub
 
-        Public Overridable Function addTable(table_id As Integer, maximum_seat As Integer) As Integer
+        Protected Function addTable(table_id As Integer, maximum_seat As Integer) As Integer
             Return DbExecutor.Insert(MyBase.getConnection,
                               "Tables",
                               New Models.Tables With {
