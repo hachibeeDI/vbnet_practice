@@ -39,7 +39,7 @@ Namespace Binder
                            TB.starting_time,
                            TB.closing_time,
                            TB.name_haveReservation,
-                           TB.num_persons
+                           TB.numberof_persons
                        FROM Bookings as TB
                        </sql>.Value,
                 ).
@@ -51,7 +51,7 @@ Namespace Binder
                                          .starting_time = row.getValue_Type(Of DateTime)("starting_time"),
                                          .closing_time = row.getValue_Type(Of DateTime)("closing_time"),
                                          .name_haveReservation = row.getValue_Type(Of String)("name_haveReservation"),
-            .numberof_persons = row.getValue_Type(Of Integer)("num_persons")
+            .numberof_persons = row.getValue_Type(Of Integer)("numberof_persons")
                                      }
                                  ).ToArray()
         End Function
@@ -67,7 +67,7 @@ Namespace Binder
                            TB.starting_time,
                            TB.closing_time,
                            TB.name_haveReservation,
-                           TB.num_persons
+                           TB.numberof_persons
                        FROM Bookings as TB
                        WHERE TB.date_reserve = @DateReserve</sql>.Value,
                     New With {.DateReserve = targ_date}
@@ -80,7 +80,7 @@ Namespace Binder
                                          .starting_time = row.getValue_Type(Of DateTime)("starting_time"),
                                          .closing_time = row.getValue_Type(Of DateTime)("closing_time"),
                                          .name_haveReservation = row.getValue_Type(Of String)("name_haveReservation"),
-                                         .numberof_persons = row.getValue_Type(Of Integer)("num_persons")
+                                         .numberof_persons = row.getValue_Type(Of Integer)("numberof_persons")
                                      }
                                  ).ToArray()
         End Function
@@ -104,7 +104,7 @@ Namespace Binder
                                 .starting_time = row.getValue_Type(Of DateTime)("starting_time"),
                                 .closing_time = row.getValue_Type(Of DateTime)("closing_time"),
                                 .name_haveReservation = row.getValue_Type(Of String)("name_haveReservation"),
-                                .numberof_persons = row.getValue_Type(Of Integer)("num_persons")}
+                                .numberof_persons = row.getValue_Type(Of Integer)("numberof_persons")}
                     End Function).
                 ToArray()
         End Function
@@ -181,10 +181,10 @@ VALUES(
             Return DbExecutor.Update(MyBase.getConnection,
                                                "Bookings",
                                                New With {
-                                                   .table_id = table_id,
+                                                   .tables_id = table_id,
                                                    .starting_time = new_start.ToString,
                                                    .closing_time = new_close.ToString,
-                                                   .num_persons = numof_persons,
+                                                   .numberof_persons = numof_persons,
                                                     .name_haveReservation = new_name
                                                  },
                                                New With {
@@ -208,10 +208,10 @@ VALUES(
             Return DbExecutor.Update(MyBase.getConnection,
                                                "Bookings",
                                                New With {
-                                                   .table_id = table_id,
+                                                   .tables_id = table_id,
                                                    .starting_time = new_start.ToString,
                                                    .closing_time = new_close.ToString,
-                                                   .num_persons = numof_persons
+                                                   .numberof_persons = numof_persons
                                                  },
                                                New With {
                                                     .id = booking_id
@@ -236,7 +236,7 @@ VALUES(
             Return DbExecutor.Update(MyBase.getConnection,
                                                "Bookings",
                                                New With {
-                                                   .table_id = table_id,
+                                                   .tables_id = table_id,
                                                    .starting_time = new_start.ToString,
                                                    .closing_time = new_close.ToString
                                                  },
