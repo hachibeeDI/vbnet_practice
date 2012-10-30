@@ -13,6 +13,15 @@ Namespace ExceptionLogic.ErrorState
         Function getMessage() As String
     End Interface
 
+
+    Public Class NoError
+        Implements IErrorState
+
+        Public Function getMessage() As String Implements IErrorState.getMessage
+            Return "処理が正常に終了しました。"
+        End Function
+    End Class
+
     Public Class UnknownError
         Implements IErrorState
 
