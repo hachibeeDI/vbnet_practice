@@ -16,12 +16,12 @@ Namespace ExceptionLogic
     ''' <remarks></remarks>
     Public Class Message
         Public Sub New(errorNumber As Integer)
-            state_ = getStateByNumber(errorNumber)
+            state_ = getState(errorNumber)
         End Sub
 
         Private ReadOnly state_ As IErrorState
 
-        Private Function getStateByNumber(errorNumber As Integer) As IErrorState
+        Private Function getState(errorNumber As Integer) As IErrorState
             Select Case errorNumber
                 Case ERROR_CODE.主キーの重複
                     Return New PrimarykeyOverlap
