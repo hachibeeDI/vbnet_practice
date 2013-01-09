@@ -12,7 +12,7 @@ Imports MyADOHelper.Models
 
 Namespace Models
     Public Class Tables
-        Inherits BaseModel
+        Inherits BaseModelEntity
 
 #Region "フィールド"
         'プロパティの使い方、もう少しスマートになりそうな気もするが。
@@ -20,6 +20,17 @@ Namespace Models
 
         Private Property id_field As New NumericColumn(3)
         Private Property maximum_seats_field As New NumericColumn(2)
+
+        ''' <summary>  </summary>
+        ''' <remarks>この部分は、画面表示の辻褄合わせなので派生クラスに実装する形にしたほうが良いのでは</remarks>
+        Public Property caption As String
+            Set(value As String)
+                'pass
+            End Set
+            Get
+                Return String.Format("No:{0} Max:{1}", id_field.Value, maximum_seats_field.Value)
+            End Get
+        End Property
 
         Public Property id As Integer
             Set(value As Integer)

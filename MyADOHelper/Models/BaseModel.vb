@@ -10,7 +10,7 @@ Option Explicit On
 
 Namespace Models
 
-    Public MustInherit Class BaseModel
+    Public MustInherit Class BaseModelEntity
         Public MustOverride Function checkFieldDefinitions() As Boolean
 
     End Class

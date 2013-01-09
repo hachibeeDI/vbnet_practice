@@ -11,6 +11,7 @@ Imports MyADOHelper.ExceptionLogic
 Imports MyADOHelper.ExceptionLogic.ErrorState
 Imports MyADOHelper.Helper
 
+Imports Book.Models
 Imports Book.Utils.Message
 
 Namespace Binder
@@ -20,14 +21,14 @@ Namespace Binder
     ''' </summary>
     ''' <remarks></remarks>
     Public Class TableManager
-        Inherits TableController
+        Inherits TableModel
 
         Public Shadows Function addTable(table_id As Integer, maximum_seat As Integer) As IErrorState
             Dim tables = MyBase.getAllTables()
             If tables.Where(Function(t) t.id = table_id).Any Then
                 Return New ErrorState.PrimarykeyOverlap : End If
 
-            Dim insert = Functional.pertial(AddressOf MyBase.addTable,
+            Dim insert = Functional.f_partial(AddressOf MyBase.addTable,
                                             table_id, maximum_seat)
 
             Return TryADOExcute.catchSQLState(insert)

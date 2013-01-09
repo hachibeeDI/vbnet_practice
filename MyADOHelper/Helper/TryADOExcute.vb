@@ -20,8 +20,15 @@ Namespace Helper
         ''' <remarks></remarks>
         Public Shared Function catchSQLState(f As Func(Of Integer)) As ExceptionLogic.ErrorState.IErrorState
             Try
-                f()
-                Return New ExceptionLogic.ErrorState.NoError
+
+                ' ADOの実行って、selectの時も実行した数を返したっけ？
+                Dim adoresult = f()
+                If adoresult >= 1 Then
+                    Return New ExceptionLogic.ErrorState.NoError
+                Else
+                    Return New ExceptionLogic.ErrorState.QueryHasNoEffect
+                End If
+
 
             Catch e As SqlClient.SqlException
                 writeLog("ERROR", e.Message & Environment.NewLine & e.StackTrace)

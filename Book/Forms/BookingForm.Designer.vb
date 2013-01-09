@@ -48,15 +48,15 @@
             Me.Label6 = New System.Windows.Forms.Label()
             Me.txt_date = New System.Windows.Forms.TextBox()
             Me.SchedulerControl1 = New DevExpress.XtraScheduler.SchedulerControl()
-            Me.SchedulerStorage1 = New DevExpress.XtraScheduler.SchedulerStorage(Me.components)
-            Me.BookingsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
-            Me.TablesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+            Me.SchedulerStorage = New DevExpress.XtraScheduler.SchedulerStorage(Me.components)
             Me.test_end_before = New System.Windows.Forms.TextBox()
             Me.test_start_before = New System.Windows.Forms.TextBox()
             Me.test_end_after = New System.Windows.Forms.TextBox()
             Me.test_start_after = New System.Windows.Forms.TextBox()
+            Me.BookingsBindingSource = New System.Windows.Forms.BindingSource(Me.components)
+            Me.TablesBindingSource = New System.Windows.Forms.BindingSource(Me.components)
             CType(Me.SchedulerControl1, System.ComponentModel.ISupportInitialize).BeginInit()
-            CType(Me.SchedulerStorage1, System.ComponentModel.ISupportInitialize).BeginInit()
+            CType(Me.SchedulerStorage, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.BookingsBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
             CType(Me.TablesBindingSource, System.ComponentModel.ISupportInitialize).BeginInit()
             Me.SuspendLayout()
@@ -193,7 +193,7 @@
             Me.SchedulerControl1.OptionsCustomization.AllowAppointmentConflicts = DevExpress.XtraScheduler.AppointmentConflictsMode.Forbidden
             Me.SchedulerControl1.Size = New System.Drawing.Size(675, 494)
             Me.SchedulerControl1.Start = New Date(2012, 10, 21, 0, 0, 0, 0)
-            Me.SchedulerControl1.Storage = Me.SchedulerStorage1
+            Me.SchedulerControl1.Storage = Me.SchedulerStorage
             Me.SchedulerControl1.TabIndex = 15
             Me.SchedulerControl1.Text = "SchedulerControl1"
             Me.SchedulerControl1.Views.DayView.TimeRulers.Add(TimeRuler1)
@@ -212,25 +212,18 @@
             Me.SchedulerControl1.Views.TimelineView.WorkTime.Start = System.TimeSpan.Parse("10:00:00")
             Me.SchedulerControl1.Views.WorkWeekView.TimeRulers.Add(TimeRuler2)
             '
-            'SchedulerStorage1
+            'SchedulerStorage
             '
-            Me.SchedulerStorage1.Appointments.DataSource = Me.BookingsBindingSource
-            Me.SchedulerStorage1.Appointments.Mappings.Description = "num_persons"
-            Me.SchedulerStorage1.Appointments.Mappings.End = "closing_time"
-            Me.SchedulerStorage1.Appointments.Mappings.Label = "num_persons"
-            Me.SchedulerStorage1.Appointments.Mappings.ResourceId = "tables_id"
-            Me.SchedulerStorage1.Appointments.Mappings.Start = "starting_time"
-            Me.SchedulerStorage1.Resources.DataSource = Me.TablesBindingSource
-            Me.SchedulerStorage1.Resources.Mappings.Caption = "id"
-            Me.SchedulerStorage1.Resources.Mappings.Id = "id"
-            '
-            'BookingsBindingSource
-            '
-            Me.BookingsBindingSource.DataSource = GetType(Book.Models.Bookings)
-            '
-            'TablesBindingSource
-            '
-            Me.TablesBindingSource.DataSource = GetType(Book.Models.Tables)
+            Me.SchedulerStorage.Appointments.DataSource = Me.BookingsBindingSource
+            Me.SchedulerStorage.Appointments.Mappings.Description = "id"
+            Me.SchedulerStorage.Appointments.Mappings.End = "closing_time"
+            Me.SchedulerStorage.Appointments.Mappings.Location = "name_haveReservation"
+            Me.SchedulerStorage.Appointments.Mappings.ResourceId = "tables_id"
+            Me.SchedulerStorage.Appointments.Mappings.Start = "starting_time"
+            Me.SchedulerStorage.Appointments.Mappings.Subject = "numberof_persons"
+            Me.SchedulerStorage.Resources.DataSource = Me.TablesBindingSource
+            Me.SchedulerStorage.Resources.Mappings.Caption = "caption"
+            Me.SchedulerStorage.Resources.Mappings.Id = "id"
             '
             'test_end_before
             '
@@ -260,6 +253,14 @@
             Me.test_start_after.Size = New System.Drawing.Size(148, 19)
             Me.test_start_after.TabIndex = 18
             '
+            'BookingsBindingSource
+            '
+            Me.BookingsBindingSource.DataSource = GetType(Book.Models.Bookings)
+            '
+            'TablesBindingSource
+            '
+            Me.TablesBindingSource.DataSource = GetType(Book.Models.Tables)
+            '
             'BookingForm
             '
             Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 12.0!)
@@ -288,7 +289,7 @@
             Me.Name = "BookingForm"
             Me.Text = "book"
             CType(Me.SchedulerControl1, System.ComponentModel.ISupportInitialize).EndInit()
-            CType(Me.SchedulerStorage1, System.ComponentModel.ISupportInitialize).EndInit()
+            CType(Me.SchedulerStorage, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.BookingsBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
             CType(Me.TablesBindingSource, System.ComponentModel.ISupportInitialize).EndInit()
             Me.ResumeLayout(False)
@@ -311,7 +312,7 @@
         Friend WithEvents Label6 As System.Windows.Forms.Label
         Friend WithEvents txt_date As System.Windows.Forms.TextBox
         Friend WithEvents SchedulerControl1 As DevExpress.XtraScheduler.SchedulerControl
-        Friend WithEvents SchedulerStorage1 As DevExpress.XtraScheduler.SchedulerStorage
+        Friend WithEvents SchedulerStorage As DevExpress.XtraScheduler.SchedulerStorage
         Friend WithEvents TablesBindingSource As System.Windows.Forms.BindingSource
         Friend WithEvents BookingsBindingSource As System.Windows.Forms.BindingSource
         Friend WithEvents test_end_before As System.Windows.Forms.TextBox

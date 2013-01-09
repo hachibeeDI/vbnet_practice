@@ -116,10 +116,10 @@
     <Import Include="System.Xml.Linq" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Binder\BaseController.vb" />
-    <Compile Include="Binder\BookingController.vb" />
+    <Compile Include="Models\BaseModel.vb" />
+    <Compile Include="Models\BookingModel.vb" />
     <Compile Include="Binder\BookingManager.vb" />
-    <Compile Include="Binder\TableController.vb" />
+    <Compile Include="Models\TableModel.vb" />
     <Compile Include="Binder\TableManager.vb" />
     <Compile Include="EntryPoint.Designer.vb">
       <DependentUpon>EntryPoint.vb</DependentUpon>
@@ -139,7 +139,7 @@
     <Compile Include="Forms\TableManage.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\ViewController\SchedulerDataDispatcher.vb" />
+    <Compile Include="Binder\ViewController\SchedulerDataDispatcher.vb" />
     <Compile Include="Models\Bookings.vb" />
     <Compile Include="Models\Tables.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />

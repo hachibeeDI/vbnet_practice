@@ -14,7 +14,7 @@ Namespace Models
     ''' <summary>  </summary>
     ''' <remarks>例えばバリデーションだけじゃなくて、ここのカラムの定義情報からフォームコントロールの制約も定義できたらいいかなという予定</remarks>
     Public Class Bookings
-        Inherits BaseModel
+        Inherits BaseModelEntity
 
 #Region "フィールド"
         Private Property id_field As New IntColumn()
@@ -80,11 +80,12 @@ Namespace Models
 
 #End Region
 
-#Region "抽象メソッドのオーバーライド"
+#Region "おーばーらいど"
         Public Overrides Function checkFieldDefinitions() As Boolean
             Dim f As IEnumerable(Of ICheckableColumn) =
-                {tables_id_field, starting_time_field,
-                 closing_time_field, name_haveReservation_field, numberof_persons_field
+                {
+                    tables_id_field, starting_time_field,
+                    closing_time_field, name_haveReservation_field, numberof_persons_field
                 }
             'AllよりAnyのほうが処理軽いみたいだけど可読性落ちるのでAll使おう
             Return f.All(Function(c) c.checkDefinition)

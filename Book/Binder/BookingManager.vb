@@ -12,14 +12,17 @@ Imports MyADOHelper.ExceptionLogic
 Imports MyADOHelper.ExceptionLogic.ErrorState
 Imports MyADOHelper.Helper
 
+Imports Book.Models
 Imports Book.Utils.Message
 Imports Book.Utils.Extension.DateTimeExtension
 
 
 Namespace Binder
 
+    ''' <summary> Bookingへのクエリ処理へのインターフェースを公開するクラス </summary>
+    ''' <remarks>バリデートなどは行うが、Messageboxを出すなどViewに関わる処理はここには書かない</remarks>
     Public Class BookingManager
-        Inherits BookingController
+        Inherits BookingModel
 
         Private _all_tables As IEnumerable(Of Models.Tables)
         Private ReadOnly Property all_tables As IEnumerable(Of Models.Tables)
@@ -36,16 +39,18 @@ Namespace Binder
         Public Shadows Function _
         reserveBooking(table_id As UInteger, start As DateTime, close As DateTime, numberof_seats As Integer, name As String) _
         As ErrorState.IErrorState
-            'このチェックいらないかも
+            'TODO 必要？
             Dim ids = all_tables.Select(Function(t) t.id)
             If Not ids.Any(Function(id) id = table_id) Then
                 '                CustomMessage.showError(SITUATIONS.存在しないid.ToMessageText, "エラー")
                 Return New NoTableId
             End If
 
-            Dim reserve = Functional.pertial(
-                AddressOf MyBase.reserveBooking,
-                CInt(table_id), start, close, numberof_seats, name)
+            Dim reserve =
+                Functional.f_partial(
+                        AddressOf MyBase.reserveBooking,
+                        CInt(table_id), start, close, numberof_seats, name
+                    )
 
             Return TryADOExcute.catchSQLState(reserve)
         End Function
@@ -61,10 +66,11 @@ Namespace Binder
                 Return validate_result
             End If
 
-            Dim update As Func(Of Integer)
-            update = Functional.pertial(
+            Dim update As Func(Of Integer) =
+                Functional.f_partial(
                             AddressOf MyBase.alterBooking,
-                            Convert.ToInt32(booking_id), table_id, start, close, numberof_persons, name)
+                            Convert.ToInt32(booking_id), table_id, start, close, numberof_persons, name
+                        )
 
             Return TryADOExcute.catchSQLState(update)
         End Function

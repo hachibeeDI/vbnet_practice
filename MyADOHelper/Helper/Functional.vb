@@ -12,7 +12,7 @@ Namespace Helper
     Public Class Functional
 
         Public Shared Function _
-        pertial(Of T1, TResult)(f As Func(Of T1, TResult), p1 As T1) _
+        f_partial(Of T1, TResult)(f As Func(Of T1, TResult), p1 As T1) _
         As Func(Of TResult)
 
             Return Function()
@@ -21,7 +21,7 @@ Namespace Helper
         End Function
 
         Public Shared Function _
-        pertial(Of T1, T2, TResult)(f As Func(Of T1, T2, TResult), p1 As T1, p2 As T2) _
+        f_partial(Of T1, T2, TResult)(f As Func(Of T1, T2, TResult), p1 As T1, p2 As T2) _
         As Func(Of TResult)
 
             Return Function()
@@ -30,7 +30,7 @@ Namespace Helper
         End Function
 
         Public Shared Function _
-        pertial(Of T1, T2, T3, TResult)(f As Func(Of T1, T2, T3, TResult), p1 As T1, p2 As T2, p3 As T3) _
+        f_partial(Of T1, T2, T3, TResult)(f As Func(Of T1, T2, T3, TResult), p1 As T1, p2 As T2, p3 As T3) _
         As Func(Of TResult)
 
             Return Function()
@@ -39,7 +39,7 @@ Namespace Helper
         End Function
 
         Public Shared Function _
-        pertial(Of T1, T2, T3, T4, TResult)(f As Func(Of T1, T2, T3, T4, TResult), p1 As T1, p2 As T2, p3 As T3, p4 As T4) _
+        f_partial(Of T1, T2, T3, T4, TResult)(f As Func(Of T1, T2, T3, T4, TResult), p1 As T1, p2 As T2, p3 As T3, p4 As T4) _
         As Func(Of TResult)
 
             Return Function()
@@ -48,7 +48,7 @@ Namespace Helper
         End Function
 
         Public Shared Function _
-        pertial(Of T1, T2, T3, T4, T5, TResult)(f As Func(Of T1, T2, T3, T4, T5, TResult), p1 As T1, p2 As T2, p3 As T3, p4 As T4, p5 As T5) _
+        f_partial(Of T1, T2, T3, T4, T5, TResult)(f As Func(Of T1, T2, T3, T4, T5, TResult), p1 As T1, p2 As T2, p3 As T3, p4 As T4, p5 As T5) _
         As Func(Of TResult)
 
             Return Function()
@@ -57,7 +57,7 @@ Namespace Helper
         End Function
 
         Public Shared Function _
-        pertial(Of T1, T2, T3, T4, T5, T6, TResult)(f As Func(Of T1, T2, T3, T4, T5, T6, TResult), p1 As T1, p2 As T2, p3 As T3, p4 As T4, p5 As T5, p6 As T6) _
+        f_partial(Of T1, T2, T3, T4, T5, T6, TResult)(f As Func(Of T1, T2, T3, T4, T5, T6, TResult), p1 As T1, p2 As T2, p3 As T3, p4 As T4, p5 As T5, p6 As T6) _
         As Func(Of TResult)
 
             Return Function()

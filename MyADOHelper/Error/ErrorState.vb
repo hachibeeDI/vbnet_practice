@@ -22,6 +22,7 @@ Namespace ExceptionLogic.ErrorState
         End Function
     End Class
 
+
     Public Class UnknownError
         Implements IErrorState
 
@@ -31,6 +32,7 @@ Namespace ExceptionLogic.ErrorState
         End Function
     End Class
 
+
     Public Class PrimarykeyOverlap
         Implements IErrorState
 
@@ -38,6 +40,16 @@ Namespace ExceptionLogic.ErrorState
             Return "主キーには重複した値を登録できません。"
         End Function
     End Class
+
+
+    Public Class QueryHasNoEffect
+        Implements IErrorState
+
+        Public Function getMessage() As String Implements IErrorState.getMessage
+            Return "クエリの実行結果が0件です。"
+        End Function
+    End Class
+
 
     ''' <summary>  </summary>
     ''' <remarks>Dataベースの定義ではなく、アプリケーションの都合上の定義</remarks>
@@ -48,6 +60,7 @@ Namespace ExceptionLogic.ErrorState
             Return "日付の整合性がとれていません"
         End Function
     End Class
+
 
     ''' <summary>  </summary>
     Public Class NoTableId
